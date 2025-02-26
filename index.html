@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aptitude Mastery Roadmap</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f0f4f8;
+      color: #333;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #4a6fa5 0%, #1c3d69 100%);
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+    
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    
+    .description {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    
+    .roadmap {
+      padding: 30px;
+      position: relative;
+    }
+    
+    .roadmap::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background-color: #4a6fa5;
+      transform: translateX(-3px);
+    }
+    
+    .stage {
+      display: flex;
+      margin-bottom: 50px;
+      position: relative;
+    }
+    
+    .stage:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+    
+    .stage-marker {
+      min-width: 50px;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .marker {
+      width: 50px;
+      height: 50px;
+      background-color: #4a6fa5;
+      border-radius: 50%;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    
+    .marker:hover {
+      transform: scale(1.1);
+      background-color: #2a4d7c;
+    }
+    
+    .stage:nth-child(2) .marker {
+      background-color: #2c82c9;
+    }
+    
+    .stage:nth-child(3) .marker {
+      background-color: #27ae60;
+    }
+    
+    .stage:nth-child(4) .marker {
+      background-color: #f39c12;
+    }
+    
+    .stage:nth-child(5) .marker {
+      background-color: #e74c3c;
+    }
+    
+    .stage-content {
+      width: calc(50% - 50px);
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .stage-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    .stage:nth-child(odd) .stage-content {
+      margin-right: 25px;
+    }
+    
+    .stage:nth-child(even) .stage-content {
+      margin-left: 25px;
+    }
+    
+    .stage-title {
+      font-size: 22px;
+      color: #2c3e50;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .stage-icon {
+      margin-right: 10px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+    }
+    
+    .topics {
+      margin-top: 15px;
+    }
+    
+    .topic {
+      padding: 10px;
+      margin-bottom: 8px;
+      background-color: #f6f8fa;
+      border-radius: 5px;
+      font-size: 14px;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .topic-icon {
+      color: #4a6fa5;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    
+    .topic-text {
+      flex: 1;
+    }
+    
+    .resources {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+    
+    .resource {
+      font-size: 14px;
+      padding: 5px 0;
+    }
+    
+    .success-metrics {
+      margin-top: 15px;
+      background-color: #e8f4fc;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    
+    .collapsible {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+    }
+    
+    .expanded {
+      max-height: 1000px;
+    }
+    
+    .expand-btn {
+      background-color: #f0f4f8;
+      border: none;
+      color: #4a6fa5;
+      padding: 8px 15px;
+      text-align: center;
+      font-size: 14px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      display: block;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+    
+    .expand-btn:hover {
+      background-color: #e0e8f0;
+    }
+    
+    footer {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+    
+    /* Mobile styles */
+    @media (max-width: 768px) {
+      .roadmap::before {
+        left: 30px;
+      }
+      
+      .stage, .stage:nth-child(odd) {
+        flex-direction: row;
+      }
+      
+      .stage-content, .stage:nth-child(odd) .stage-content, .stage:nth-child(even) .stage-content {
+        width: calc(100% - 60px);
+        margin-left: 30px;
+        margin-right: 0;
+      }
+      
+      .stage-marker {
+        min-width: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Aptitude Mastery Roadmap</h1>
+      <p class="description">A comprehensive journey from foundational concepts to advanced problem-solving techniques for aptitude tests. Master each stage to build your skills systematically.</p>
+    </header>
+    
+    <div class="roadmap">
+      <!-- Stage 1: Foundation -->
+      <div class="stage">
+        <div class="stage-marker">
+          <div class="marker" onclick="toggleExpand('stage1')">1</div>
+        </div>
+        <div class="stage-content">
+          <h2 class="stage-title">
+            <span class="stage-icon" style="background-color: #e8f4fc;">📚</span>
+            Foundation Stage
+          </h2>
+          <p>Build core mathematical skills and foundational concepts necessary for aptitude tests.</p>
+          
+          <div id="stage1" class="collapsible">
+            <div class="topics">
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Basic Arithmetic:</strong> Addition, subtraction, multiplication, division, BODMAS/PEMDAS rules
+                </div>
+              </div>
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Number Systems:</strong> Natural numbers, integers, fractions, decimals, and percentages
+                </div>
+              </div>
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Basic Algebra:</strong> Linear equations, simple formulas, and basic algebraic manipulations
+                </div>
+              </div>
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Mental Math:</strong> Quick calculation techniques and shortcuts
+                </div>
+              </div>
+            </div>
+            
+            <div class="resources">
+              <h3>Recommended Resources:</h3>
+              <div class="resource">• Khan Academy - Basic Mathematics</div>
+              <div class="resource">• "Mathematics for Competitive Exams" - Basic Section</div>
+              <div class="resource">• Trachtenberg Speed System of Basic Mathematics</div>
+            </div>
+            
+            <div class="success-metrics">
+              <strong>Success Metrics:</strong> Solve basic arithmetic problems within 30-60 seconds without a calculator. Score 80%+ on foundation level practice tests.
+            </div>
+          </div>
+          
+          <button class="expand-btn" onclick="toggleExpand('stage1')">Show Details</button>
+        </div>
+      </div>
+      
+      <!-- Stage 2: Intermediate -->
+      <div class="stage">
+        <div class="stage-marker">
+          <div class="marker" onclick="toggleExpand('stage2')">2</div>
+        </div>
+        <div class="stage-content">
+          <h2 class="stage-title">
+            <span class="stage-icon" style="background-color: #e1f5fe;">🧮</span>
+            Intermediate Concepts
+          </h2>
+          <p>Master core aptitude topics and develop efficient problem-solving methods.</p>
+          
+          <div id="stage2" class="collapsible">
+            <div class="topics">
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Percentages & Ratios:</strong> Percentage change, profit/loss, mark-up, and complex ratio problems
+                </div>
+              </div>
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Speed, Time & Distance:</strong> Relative speed, average speed, train problems
+                </div>
+              </div>
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Time & Work:</strong> Work efficiency, pipes and cisterns, work rate problems
+                </div>
+              </div>
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Simple & Compound Interest:</strong> Interest calculations, installment payments
+                </div>
+              </div>
+            </div>
+            
+            <div class="resources">
+              <h3>Recommended Resources:</h3>
+              <div class="resource">• R.S. Aggarwal - Quantitative Aptitude</div>
+              <div class="resource">• "How to Prepare for Quantitative Aptitude" by Arun Sharma</div>
+              <div class="resource">• Brilliant.org - Problem Solving courses</div>
+            </div>
+            
+            <div class="success-metrics">
+              <strong>Success Metrics:</strong> Solve standard aptitude problems within 1-2 minutes. Identify shortcuts for common problem types. Score 70%+ on intermediate timed tests.
+            </div>
+          </div>
+          
+          <button class="expand-btn" onclick="toggleExpand('stage2')">Show Details</button>
+        </div>
+      </div>
+      
+      <!-- Stage 3: Advanced -->
+      <div class="stage">
+        <div class="stage-marker">
+          <div class="marker" onclick="toggleExpand('stage3')">3</div>
+        </div>
+        <div class="stage-content">
+          <h2 class="stage-title">
+            <span class="stage-icon" style="background-color: #e8f5e9;">📊</span>
+            Advanced Problem Solving
+          </h2>
+          <p>Tackle complex, multi-step problems and develop advanced analysis techniques.</p>
+          
+          <div id="stage3" class="collapsible">
+            <div class="topics">
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Permutation & Combination:</strong> Counting principles, arrangements, selections
+                </div>
+              </div>
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Probability:</strong> Basic probability, conditional probability, probability distributions
+                </div>
+              </div>
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Data Interpretation:</strong> Tables, charts, graphs analysis, comparing datasets
+                </div>
+              </div>
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Geometry & Mensuration:</strong> Areas, volumes, coordinate geometry problems
+                </div>
+              </div>
+            </div>
+            
+            <div class="resources">
+              <h3>Recommended Resources:</h3>
+              <div class="resource">• "Magical Book on Quicker Maths" by M. Tyra</div>
+              <div class="resource">• Data Interpretation by Arun Sharma</div>
+              <div class="resource">• GMAT Official Advanced Questions</div>
+            </div>
+            
+            <div class="success-metrics">
+              <strong>Success Metrics:</strong> Solve complex problems in under 3 minutes. Score 65%+ on advanced timed tests. Identify multiple solution methods for the same problem.
+            </div>
+          </div>
+          
+          <button class="expand-btn" onclick="toggleExpand('stage3')">Show Details</button>
+        </div>
+      </div>
+      
+      <!-- Stage 4: Logical Reasoning -->
+      <div class="stage">
+        <div class="stage-marker">
+          <div class="marker" onclick="toggleExpand('stage4')">4</div>
+        </div>
+        <div class="stage-content">
+          <h2 class="stage-title">
+            <span class="stage-icon" style="background-color: #fff8e1;">🧩</span>
+            Logical Reasoning Mastery
+          </h2>
+          <p>Develop strong logical reasoning skills essential for analytical and non-mathematical aptitude sections.</p>
+          
+          <div id="stage4" class="collapsible">
+            <div class="topics">
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Verbal Reasoning:</strong> Syllogisms, statements and conclusions, logical deductions
+                </div>
+              </div>
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Non-verbal Reasoning:</strong> Pattern recognition, series completion, analogies
+                </div>
+              </div>
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Analytical Reasoning:</strong> Blood relations, directions, ordering and sequencing, coding-decoding
+                </div>
+              </div>
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Critical Thinking:</strong> Assumptions, strong/weak arguments, course of action
+                </div>
+              </div>
+            </div>
+            
+            <div class="resources">
+              <h3>Recommended Resources:</h3>
+              <div class="resource">• Modern Approach to Verbal & Non-Verbal Reasoning by R.S. Aggarwal</div>
+              <div class="resource">• Analytical Reasoning by M.K. Pandey</div>
+              <div class="resource">• LSAT Logic Games practice sets</div>
+            </div>
+            
+            <div class="success-metrics">
+              <strong>Success Metrics:</strong> Correctly solve 4 out of 5 reasoning puzzles. Complete reasoning sections within allotted time with 70%+ accuracy.
+            </div>
+          </div>
+          
+          <button class="expand-btn" onclick="toggleExpand('stage4')">Show Details</button>
+        </div>
+      </div>
+      
+      <!-- Stage 5: Expert -->
+      <div class="stage">
+        <div class="stage-marker">
+          <div class="marker" onclick="toggleExpand('stage5')">5</div>
+        </div>
+        <div class="stage-content">
+          <h2 class="stage-title">
+            <span class="stage-icon" style="background-color: #ffebee;">🏆</span>
+            Expert Level & Test Strategy
+          </h2>
+          <p>Perfect your test-taking strategy and master the most challenging aptitude problems.</p>
+          
+          <div id="stage5" class="collapsible">
+            <div class="topics">
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Exam Strategy:</strong> Time management, question selection, educated guessing techniques
+                </div>
+              </div>
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Advanced Integration:</strong> Multi-concept problems requiring multiple skills
+                </div>
+              </div>
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Pattern Recognition:</strong> Identifying recurring patterns in different problem types
+                </div>
+              </div>
+              <div class="topic">
+                <span class="topic-icon">→</span>
+                <div class="topic-text">
+                  <strong>Mock Tests:</strong> Full-length practice tests under exam conditions
+                </div>
+              </div>
+            </div>
+            
+            <div class="resources">
+              <h3>Recommended Resources:</h3>
+              <div class="resource">• Previous years' question papers from target exams</div>
+              <div class="resource">• "Cracking the [Specific Exam]" guides</div>
+              <div class="resource">• Expert-level online mock test series</div>
+            </div>
+            
+            <div class="success-metrics">
+              <strong>Success Metrics:</strong> Score 80%+ on full-length mock tests. Complete test sections with time to spare. Correctly answer 7 out of 10 expert-level problems.
+            </div>
+          </div>
+          
+          <button class="expand-btn" onclick="toggleExpand('stage5')">Show Details</button>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <p>Start at your current level and progress through each stage methodically. Consistent practice is key to aptitude mastery!</p>
+    </footer>
+  </div>
+  
+  <script>
+    function toggleExpand(id) {
+      const element = document.getElementById(id);
+      const button = element.nextElementSibling;
+      
+      if (element.classList.contains('expanded')) {
+        element.classList.remove('expanded');
+        button.textContent = 'Show Details';
+      } else {
+        element.classList.add('expanded');
+        button.textContent = 'Hide Details';
+      }
+    }
+  </script>
+</body>
+</html>
